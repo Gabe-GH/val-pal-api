@@ -1,12 +1,15 @@
 import express from 'express';
 
 const app = express();
-const port = 4000 | process.env.port
+const port = 4000 | process.env.PORT
 
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.json({message: 'hello world'});
 });
 
-app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
-});
+const server = app.listen(port, () => 
+    console.log(`Server listening on port ${port}`)
+);
+
+server.keepAliveTimeout = 120 * 1000;
+server.headersTimeout = 120 * 1000;
